@@ -1,13 +1,22 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Menu } from "semantic-ui-react";
 
 export default class NavBar extends React.Component {
   render() {
     return (
-      <div>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="/songs">My Songs</NavLink>
-      </div>
+      <React.Fragment>
+        <Menu>
+          <Menu.Menu>
+            <Menu.Item>
+              <NavLink to="/">Home</NavLink>
+            </Menu.Item>
+            <Menu.Item>
+              <NavLink to="/songs">My Songs</NavLink>
+            </Menu.Item>
+          </Menu.Menu>
+        </Menu>
+      </React.Fragment>
     );
   }
 }
