@@ -4,10 +4,20 @@ import { Piano, KeyboardShortcuts, MidiNumbers } from "react-piano";
 import "react-piano/dist/styles.css";
 import DimensionsProvider from "./DimensionsProvider";
 import SoundfontProvider from "./SoundfontProvider";
-import { Button, Icon } from "semantic-ui-react";
+import { Button, Icon, Dropdown } from "semantic-ui-react";
+import jsonData from "../data.json";
 
+const titleize = require("titleize");
+const menuOptions = jsonData.map(el => {
+  let sound = titleize(el.split("_").join(" "));
+  let lol = { value: el, text: sound };
+  return lol;
+});
+
+console.log(menuOptions);
 const audioContext = new (window.AudioContext || window.webkitAudioContext)();
 const soundfontHostname = "https://d1pzp51pvbm36p.cloudfront.net";
+
 // 18 keys counting first and last
 // const noteRange = {
 //   first: 48,
@@ -27,7 +37,8 @@ export default class PianoContainer extends React.Component {
       noteRange: {
         first: 48,
         last: 65
-      }
+      },
+      instrumentName: "acoustic_grand_piano"
     };
   }
   downOctave = () => {
@@ -54,14 +65,27 @@ export default class PianoContainer extends React.Component {
       });
     }
   };
+  changeSound = event => {
+    let sound = menuOptions.find(el => event.target.textContent === el.text);
+    this.setState({
+      instrumentName: sound.value
+    });
+  };
 
   render(props) {
     return (
       <div>
+        <Dropdown
+          onChange={this.changeSound}
+          value={this.state.instrumentName}
+          selection
+          options={menuOptions}
+        />
         <DimensionsProvider>
           {({ containerWidth, containerHeight }) => (
             <SoundfontProvider
-              instrumentName="acoustic_grand_piano"
+              instrumentName={this.state.instrumentName}
+              soundfont={"MusyngKite"}
               audioContext={audioContext}
               hostname={soundfontHostname}
               render={({ isLoading, playNote, stopNote }) => (
@@ -89,6 +113,11 @@ export default class PianoContainer extends React.Component {
         <Button icon labelPosition="right" onClick={this.upOctave.bind(this)}>
           Up an Octave <Icon name="right arrow" />
         </Button>
+        <Button.Group horizontal labeled icon>
+          <Button icon="record" content="record" />
+          <Button icon="stop" content="stop" />
+          <Button icon="play" content="play" />
+        </Button.Group>
       </div>
     );
   }

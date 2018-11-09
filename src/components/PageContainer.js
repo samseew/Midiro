@@ -14,7 +14,6 @@ export default class PageContainer extends React.Component {
   render() {
     return (
       <div>
-        Page Container:
         <Switch>
           <Route exact path="/" component={PianoContainer} />
           <Route path="/songs" component={SongsContainer} />
