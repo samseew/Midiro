@@ -14,6 +14,9 @@ export default class NavBar extends React.Component {
             <Menu.Item>
               <NavLink to="/songs">My Songs</NavLink>
             </Menu.Item>
+            <Menu.Item>
+              <NavLink to="/findlyrics">Find Lyrics</NavLink>
+            </Menu.Item>
           </Menu.Menu>
         </Menu>
       </React.Fragment>

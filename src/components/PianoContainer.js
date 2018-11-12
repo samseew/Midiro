@@ -10,6 +10,7 @@ import jsonData from "../data.json";
 import "../piano.css";
 import MusicRecorder from "./MusicRecorder.js";
 import PianoRecord from "./PianoRecord.js";
+import Metronome from "./Metronome.js";
 
 const titleize = require("titleize");
 const menuOptions = jsonData.map(el => {
@@ -159,6 +160,7 @@ export default class PianoContainer extends React.Component {
         <Button icon labelPosition="right" onClick={this.upOctave.bind(this)}>
           Up an Octave (N) <Icon name="right arrow" />
         </Button>
+        <Metronome />
         <DimensionsProvider>
           {({ containerWidth, containerHeight }) => (
             <SoundfontProvider

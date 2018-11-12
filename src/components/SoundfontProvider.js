@@ -71,7 +71,7 @@ class SoundfontProvider extends React.Component {
   };
 
   startThisRecording = e => {
-    if (this.props.recordingStatus === "RECORDING") {
+    if (this.props.recordingStatus !== "RECORDING") {
       thisRecording.startTime = Date.now() / 1000;
     }
     this.props.startRecording();
@@ -90,10 +90,18 @@ class SoundfontProvider extends React.Component {
     // start Time - when to play based on difference from start time
     // ex: time1: 10, time2: 5 , start time 15 sec
     // means start note at the 5 second mark and hold for 5 seconds
+    // setInterval(this.playNote(el.midiNumber, holdTime)
     thisRecording.reverse().map(el => {
       let holdTime = el.time2 - el.time1;
-      let startNoteTime = beginningTime - el.time1;
-      setTimeout(setInterval(this.playNote(el.midiNumber, 0)), startNoteTime);
+      let midiNumber = el.midiNumber;
+      let startNoteTime = (el.time1 - beginningTime) * 1000;
+      console.log(startNoteTime);
+      setTimeout(
+        function() {
+          this.playNote(el.midiNumber);
+        }.bind(this),
+        startNoteTime
+      );
     });
 
     //set Timeout SetInterval( 0)
@@ -140,7 +148,7 @@ class SoundfontProvider extends React.Component {
 
   render() {
     return this.props.render({
-      startRecording: this.startThisRecording,
+      startRecording: this.startThisRecording.bind(this),
       clearRecording: this.clearThisRecording,
       isLoading: !this.state.instrument,
       playNote: this.playNote,
