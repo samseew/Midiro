@@ -1,5 +1,6 @@
 import React from "react";
 import { Piano } from "react-piano";
+import { Button } from "semantic-ui-react";
 
 const DURATION_UNIT = 0.2;
 const DEFAULT_NOTE_DURATION = DURATION_UNIT;
@@ -69,6 +70,26 @@ class PianoWithRecording extends React.Component {
           activeNotes={activeNotes}
           {...pianoProps}
         />
+        <Button.Group horizontal labeled icon>
+          <Button
+            onClick={this.props.startRecording}
+            color={this.props.recordColor}
+            icon="record"
+            content="record"
+          />
+          <Button
+            onClick={this.props.stopRecording}
+            icon="stop"
+            content="stop"
+          />
+          <Button onClick={this.props.clearRecording} content="clear" />
+
+          <Button
+            onClick={this.props.playRecording}
+            icon="play"
+            content="play"
+          />
+        </Button.Group>
       </div>
     );
   }

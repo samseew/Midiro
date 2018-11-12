@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import Soundfont from "soundfont-player";
 
+let thisRecording = [];
+
 class SoundfontProvider extends React.Component {
   static propTypes = {
     instrumentName: PropTypes.string.isRequired,
@@ -53,8 +55,8 @@ class SoundfontProvider extends React.Component {
       });
     });
   };
-
   playNote = midiNumber => {
+    let time1 = Date.now() / 1000;
     this.props.audioContext.resume().then(() => {
       const audioNode = this.state.instrument.play(midiNumber);
       this.setState({
@@ -62,15 +64,56 @@ class SoundfontProvider extends React.Component {
           [midiNumber]: audioNode
         })
       });
+      if (this.props.recordingStatus === "RECORDING") {
+        thisRecording.unshift({ audioNode, midiNumber, time1 });
+      }
     });
   };
 
+  startThisRecording = e => {
+    if (this.props.recordingStatus === "RECORDING") {
+      thisRecording.startTime = Date.now() / 1000;
+    }
+    this.props.startRecording();
+  };
+
+  clearThisRecording = () => {
+    thisRecording = [];
+    this.props.clearRecording();
+  };
+
+  playThisRecording = () => {
+    let beginningTime = thisRecording["startTime"];
+    let recording = [];
+    // reverse the entire array of objects
+    // time 1 and time 2 difference of a midi number - how long note has been held
+    // start Time - when to play based on difference from start time
+    // ex: time1: 10, time2: 5 , start time 15 sec
+    // means start note at the 5 second mark and hold for 5 seconds
+    thisRecording.reverse().map(el => {
+      let holdTime = el.time2 - el.time1;
+      let startNoteTime = beginningTime - el.time1;
+      setTimeout(setInterval(this.playNote(el.midiNumber, 0)), startNoteTime);
+    });
+
+    //set Timeout SetInterval( 0)
+
+    // (setInterval(Hold (midi Note)), setInterval(Hold (midi Note)), set Interval(hold(note)))
+
+    this.props.playRecording();
+  };
   stopNote = midiNumber => {
+    let time = Date.now() / 1000;
     this.props.audioContext.resume().then(() => {
       if (!this.state.activeAudioNodes[midiNumber]) {
         return;
       }
       const audioNode = this.state.activeAudioNodes[midiNumber];
+      if (this.props.recordingStatus === "RECORDING") {
+        let pair = thisRecording.find(el => el.midiNumber === midiNumber);
+        pair["time2"] = time;
+        console.log(thisRecording);
+      }
       audioNode.stop();
       this.setState({
         activeAudioNodes: Object.assign({}, this.state.activeAudioNodes, {
@@ -97,10 +140,13 @@ class SoundfontProvider extends React.Component {
 
   render() {
     return this.props.render({
+      startRecording: this.startThisRecording,
+      clearRecording: this.clearThisRecording,
       isLoading: !this.state.instrument,
       playNote: this.playNote,
       stopNote: this.stopNote,
-      stopAllNotes: this.stopAllNotes
+      stopAllNotes: this.stopAllNotes,
+      playRecording: this.playThisRecording
     });
   }
 }
