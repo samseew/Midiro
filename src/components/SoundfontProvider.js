@@ -92,22 +92,23 @@ class SoundfontProvider extends React.Component {
     // means start note at the 5 second mark and hold for 5 seconds
     // setInterval(this.playNote(el.midiNumber, holdTime)
     thisRecording.reverse().map(el => {
-      let holdTime = el.time2 - el.time1;
+      let holdTime = (el.time2 - el.time1) * 1000;
+      console.log(holdTime);
       let midiNumber = el.midiNumber;
       let startNoteTime = (el.time1 - beginningTime) * 1000;
-      console.log(startNoteTime);
       setTimeout(
         function() {
           this.playNote(el.midiNumber);
+          setTimeout(
+            function() {
+              this.stopNote(el.midiNumber);
+            }.bind(this),
+            holdTime
+          );
         }.bind(this),
         startNoteTime
       );
     });
-
-    //set Timeout SetInterval( 0)
-
-    // (setInterval(Hold (midi Note)), setInterval(Hold (midi Note)), set Interval(hold(note)))
-
     this.props.playRecording();
   };
   stopNote = midiNumber => {
@@ -146,8 +147,32 @@ class SoundfontProvider extends React.Component {
     });
   };
 
+  saveThisRecording = () => {
+    let saved = JSON.stringify([
+      ...thisRecording,
+      { startTime: thisRecording["startTime"] }
+    ]);
+    console.log(saved);
+    let data = JSON.stringify({
+      name: "SongName",
+      user_id: 1,
+      data: saved
+    });
+
+    fetch("http://localhost:6969/songs", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: data
+    });
+    this.props.saveRecording();
+  };
+
   render() {
     return this.props.render({
+      saveRecording: this.saveThisRecording,
       startRecording: this.startThisRecording.bind(this),
       clearRecording: this.clearThisRecording,
       isLoading: !this.state.instrument,

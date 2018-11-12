@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { KeyboardShortcuts } from "react-piano";
 import "react-piano/dist/styles.css";
 
@@ -8,7 +7,6 @@ import SoundfontProvider from "./SoundfontProvider";
 import { Button, Icon, Dropdown } from "semantic-ui-react";
 import jsonData from "../data.json";
 import "../piano.css";
-import MusicRecorder from "./MusicRecorder.js";
 import PianoRecord from "./PianoRecord.js";
 import Metronome from "./Metronome.js";
 
@@ -144,6 +142,10 @@ export default class PianoContainer extends React.Component {
   playRecording = () => {
     console.log("playing recoridng");
   };
+
+  saveRecording = () => {
+    console.log("saving record");
+  };
   render(props) {
     return (
       <div>
@@ -171,6 +173,7 @@ export default class PianoContainer extends React.Component {
               playRecording={this.playRecording}
               stopRecording={this.stopRecording}
               startRecording={this.startRecording}
+              saveRecording={this.saveRecording}
               clearRecording={this.clearRecording}
               recordingStatus={this.state.recordingStatus}
               render={({
@@ -179,11 +182,13 @@ export default class PianoContainer extends React.Component {
                 stopNote,
                 playRecording,
                 clearRecording,
-                startRecording
+                startRecording,
+                saveRecording
               }) => (
                 <PianoRecord
                   recordColor={this.state.recordColor}
                   startRecording={startRecording}
+                  saveRecording={saveRecording}
                   clearRecording={clearRecording}
                   playRecording={playRecording}
                   stopRecording={this.stopRecording}
@@ -201,99 +206,8 @@ export default class PianoContainer extends React.Component {
             />
           )}
         </DimensionsProvider>
-        <div>
-          <MusicRecorder
-            record={this.startRecording.bind(this)}
-            play={this.onClickPlay}
-            stop={this.onClickStop}
-            clear={this.onClickClear}
-            recordColor={this.state.recordColor}
-          />
-        </div>
+        <div />
       </div>
     );
   }
 }
-
-// 18 keys counting first and last
-// const noteRange = {
-//   first: 48,
-//   last: 65
-// };
-// const lowerCaseShortCuts = KeyboardShortcuts.create({
-//   firstNote: 65,
-//   lastNote: 82,
-//   keyboardConfig: KeyboardShortcuts.HOME_ROW
-// });
-//
-// const upperCaseShortcuts = [...lowerCaseShortCuts].map(el => {
-//   return { key: el.key.toUpperCase(), midiNumber: el.midiNumber };
-// });
-
-// getRecordingEndTime = () => {
-//   if (this.state.recording.events.length === 0) {
-//     return 0;
-//   }
-//   return Math.max(
-//     ...this.state.recording.events.map(event => event.time + event.duration)
-//   );
-// };
-// shortcut to setting Recording object in state
-// setRecordingStatus = value => {
-//   this.setState({
-//     recording: Object.assign({}, this.state.recording, value)
-//   });
-// };
-
-// onClickPlay = () => {
-//   //changes state to play
-//   this.setRecordingStatus({
-//     mode: "PLAYING"
-//   });
-//
-//   const startAndEndTimes = _.uniq(
-//     // organizes one event with a start and end time
-//     _.flatMap(this.state.recording.events, event => [
-//       event.time,
-//       event.time + event.duration
-//     ])
-//   );
-//   startAndEndTimes.forEach(time => {
-//     //for each event, push it to schedule events array
-//     this.scheduledEvents.push(
-//       setTimeout(() => {
-//         const currentEvents = this.state.recording.events.filter(event => {
-//           return event.time <= time && event.time + event.duration > time;
-//         });
-//         this.setRecordingStatus({
-//           currentEvents
-//         });
-//       }, time * 1000)
-//     );
-//   });
-//   // Stop at the end of thing recorded
-//   setTimeout(() => {
-//     this.onClickStop();
-//   }, this.getRecordingEndTime() * 1000);
-// };
-
-// onClickStop = () => {
-//   this.scheduledEvents.forEach(scheduledEvent => {
-//     clearTimeout(scheduledEvent);
-//   });
-//   this.setRecordingStatus({
-//     mode: "STOP",
-//     currentEvents: [] // empty current events
-//   });
-// };
-
-// onClickClear = () => {
-//   // stops recording and clears all state
-//   this.onClickStop();
-//   this.setRecordingStatus({
-//     events: [],
-//     mode: "CLEARED",
-//     currentEvents: [],
-//     currentTime: 0
-//   });
-// };

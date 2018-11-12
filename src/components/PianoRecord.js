@@ -89,6 +89,12 @@ class PianoWithRecording extends React.Component {
             icon="play"
             content="play"
           />
+
+          <Button
+            onClick={this.props.saveRecording}
+            icon="save"
+            content="save"
+          />
         </Button.Group>
       </div>
     );

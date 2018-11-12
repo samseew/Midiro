@@ -7,13 +7,6 @@ import LyricsContainer from "./LyricsContainer.js";
 import Lyrics from "./Lyrics.js";
 import SearchResults from "./SearchResults.js";
 export default class PageContainer extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      mySongs: []
-    };
-  }
-
   render() {
     return (
       <div>
