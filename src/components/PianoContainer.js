@@ -1,7 +1,7 @@
 import React from "react";
 import { KeyboardShortcuts } from "react-piano";
 import "react-piano/dist/styles.css";
-
+import song from "../song/peppa pig john cena what music are you into.mp3";
 import DimensionsProvider from "./DimensionsProvider";
 import SoundfontProvider from "./SoundfontProvider";
 import { Button, Icon, Dropdown } from "semantic-ui-react";
@@ -9,6 +9,8 @@ import jsonData from "../data.json";
 import "../piano.css";
 import PianoRecord from "./PianoRecord.js";
 import Metronome from "./Metronome.js";
+import Konami from "react-konami-code";
+import SongsContainer from "./SongsContainer.js";
 
 const titleize = require("titleize");
 const menuOptions = jsonData.map(el => {
@@ -23,12 +25,14 @@ const soundfontHostname = "https://d1pzp51pvbm36p.cloudfront.net";
 export default class PianoContainer extends React.Component {
   constructor() {
     super();
+    this.brunoSong = new Audio(song);
     this.state = {
       octave: 2, // no less than 0, no more than 5
       noteRange: {
         first: 48,
         last: 65
       },
+      easterEgg: false,
       recordingEvents: [],
       instrumentName: "acoustic_grand_piano",
       recordingStatus: null,
@@ -146,22 +150,174 @@ export default class PianoContainer extends React.Component {
   saveRecording = () => {
     console.log("saving record");
   };
+
+  handleSecret = () => {
+    this.brunoSong.play();
+    this.setState({
+      easterEgg: true
+    });
+  };
+
+  secret() {
+    return (
+      <div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <ul />
+        <ul />
+        <ul />
+        <ul />
+        <ul />
+        <ul /> <ul />
+        <ul />
+        <ul />
+        <ul />
+        <ul />
+        <ul />
+        <ul />
+        <ul />
+        <ul />
+        <ul />
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>lMAO</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <img src={require("../bruno-cena.gif")} alt="" />
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND LMAO ENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+        <ul>AND HIS NAME IS JOHN CENA</ul>
+      </div>
+    );
+  }
+
   render(props) {
     return (
       <div>
-        <Button icon labelPosition="left" onClick={this.downOctave.bind(this)}>
-          <Icon name="left arrow" />
-          Down an Octave (V)
-        </Button>
+        <Konami action={this.handleSecret} code={[66, 82, 85, 78, 79]} />
+
+        <Button
+          size="small"
+          icon="arrow alternate circle left outline"
+          labelPosition="left"
+          content="Down an Octave (V)"
+          onClick={this.downOctave.bind(this)}
+        />
         <Dropdown
           onChange={this.changeSound}
           value={this.state.instrumentName}
           selection
           options={menuOptions}
         />
-        <Button icon labelPosition="right" onClick={this.upOctave.bind(this)}>
-          Up an Octave (N) <Icon name="right arrow" />
-        </Button>
+        <Button
+          size="small"
+          icon="arrow alternate circle right outline"
+          labelPosition="right"
+          content="Up an Octave (N)"
+          onClick={this.upOctave.bind(this)}
+        />
         <Metronome />
         <DimensionsProvider>
           {({ containerWidth, containerHeight }) => (
@@ -183,7 +339,8 @@ export default class PianoContainer extends React.Component {
                 playRecording,
                 clearRecording,
                 startRecording,
-                saveRecording
+                saveRecording,
+                listenToRecording
               }) => (
                 <PianoRecord
                   recordColor={this.state.recordColor}
@@ -195,6 +352,7 @@ export default class PianoContainer extends React.Component {
                   recording={this.state.recording}
                   setRecording={this.setRecording}
                   noteRange={this.state.noteRange}
+                  listenToRecording={listenToRecording}
                   width={containerWidth}
                   playNote={playNote}
                   stopNote={stopNote}
@@ -206,7 +364,9 @@ export default class PianoContainer extends React.Component {
             />
           )}
         </DimensionsProvider>
+        <br />
         <div />
+        {this.state.easterEgg ? this.secret() : null}
       </div>
     );
   }

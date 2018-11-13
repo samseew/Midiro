@@ -4,7 +4,8 @@ export default class SongsContainer extends React.Component {
   constructor() {
     super();
     this.state = {
-      User: []
+      User: [],
+      Songs: []
     };
   }
 
@@ -12,11 +13,12 @@ export default class SongsContainer extends React.Component {
     console.log("deleted");
     fetch(`http://localhost:6969/songs/${id}`, {
       method: "DELETE"
-    }).then(
+    }).then(() => {
+      let updated = this.state.Songs.filter(song => song.id !== id);
       this.setState({
-        User: this.state.User
-      })
-    );
+        Songs: updated
+      });
+    });
   };
 
   componentDidMount() {
@@ -25,7 +27,8 @@ export default class SongsContainer extends React.Component {
       .then(data => {
         console.log(data);
         this.setState({
-          User: data
+          User: data,
+          Songs: data.songs
         });
       });
   }
@@ -33,7 +36,12 @@ export default class SongsContainer extends React.Component {
     if (this.state.User) {
       return (
         <div>
-          <SongList user={this.state.User} handleDelete={this.handleDelete} />
+          <SongList
+            user={this.state.User}
+            songs={this.state.Songs}
+            handleDelete={this.handleDelete}
+            listenToRecording={this.props.listenToRecording}
+          />
         </div>
       );
     } else {

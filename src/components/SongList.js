@@ -6,11 +6,17 @@ export default class SongList extends React.Component {
       return (
         <div>
           <p>Hello {this.props.user.first_name}, here are your songs:</p>
-          {this.props.user.songs.map(song => (
+          {this.props.songs.map(song => (
             <div>
               <p>
-                {this.props.user.songs.indexOf(song) + 1}:{song.name}
-                <Button onClick="">Listen</Button>
+                {this.props.songs.indexOf(song) + 1}:{song.name}
+                <Button
+                  onClick={() => {
+                    this.props.listenToRecording(song);
+                  }}
+                >
+                  Listen
+                </Button>
                 <Button onClick={() => this.props.handleDelete(song.id)}>
                   Delete
                 </Button>

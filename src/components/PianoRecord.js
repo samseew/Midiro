@@ -1,7 +1,7 @@
 import React from "react";
 import { Piano } from "react-piano";
 import { Button } from "semantic-ui-react";
-
+import SongsContainer from "./SongsContainer.js";
 const DURATION_UNIT = 0.2;
 const DEFAULT_NOTE_DURATION = DURATION_UNIT;
 
@@ -12,7 +12,8 @@ class PianoWithRecording extends React.Component {
 
   state = {
     keysDown: {},
-    noteDuration: DEFAULT_NOTE_DURATION
+    noteDuration: DEFAULT_NOTE_DURATION,
+    listening: false
   };
 
   onPlayNoteInput = midiNumber => {
@@ -82,7 +83,11 @@ class PianoWithRecording extends React.Component {
             icon="stop"
             content="stop"
           />
-          <Button onClick={this.props.clearRecording} content="clear" />
+          <Button
+            icon="erase"
+            onClick={this.props.clearRecording}
+            content="clear"
+          />
 
           <Button
             onClick={this.props.playRecording}
@@ -96,6 +101,9 @@ class PianoWithRecording extends React.Component {
             content="save"
           />
         </Button.Group>
+        <br />
+
+        <SongsContainer listenToRecording={this.props.listenToRecording} />
       </div>
     );
   }

@@ -170,6 +170,41 @@ class SoundfontProvider extends React.Component {
     this.props.saveRecording();
   };
 
+  listenToRecording = song => {
+    console.log(song);
+    let parsedSong = JSON.parse(song.data);
+
+    let beginningTime = parsedSong.slice(-1)[0].startTime;
+
+    let recording = parsedSong.filter(el => el.audioNode);
+
+    // reverse the entire array of objects
+    // time 1 and time 2 difference of a midi number - how long note has been held
+    // start Time - when to play based on difference from start time
+    // ex: time1: 10, time2: 5 , start time 15 sec
+    // means start note at the 5 second mark and hold for 5 seconds
+    // setInterval(this.playNote(el.midiNumber, holdTime)
+    recording.reverse().map(el => {
+      let holdTime = (el.time2 - el.time1) * 1000;
+      console.log(holdTime);
+      let midiNumber = el.midiNumber;
+      let startNoteTime = (el.time1 - beginningTime) * 1000;
+      setTimeout(
+        function() {
+          this.playNote(el.midiNumber);
+          setTimeout(
+            function() {
+              this.stopNote(el.midiNumber);
+            }.bind(this),
+            holdTime
+          );
+        }.bind(this),
+        startNoteTime
+      );
+    });
+    this.props.playRecording();
+  };
+
   render() {
     return this.props.render({
       saveRecording: this.saveThisRecording,
@@ -179,7 +214,8 @@ class SoundfontProvider extends React.Component {
       playNote: this.playNote,
       stopNote: this.stopNote,
       stopAllNotes: this.stopAllNotes,
-      playRecording: this.playThisRecording
+      playRecording: this.playThisRecording,
+      listenToRecording: this.listenToRecording
     });
   }
 }

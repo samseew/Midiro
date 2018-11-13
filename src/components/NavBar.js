@@ -11,9 +11,7 @@ export default class NavBar extends React.Component {
             <Menu.Item>
               <NavLink to="/">Home</NavLink>
             </Menu.Item>
-            <Menu.Item>
-              <NavLink to="/songs">My Songs</NavLink>
-            </Menu.Item>
+
             <Menu.Item>
               <NavLink to="/findlyrics">Find Lyrics</NavLink>
             </Menu.Item>

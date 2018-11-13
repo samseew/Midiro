@@ -43,15 +43,11 @@ export default class Lyrics extends React.Component {
         <div>
           <p>
             Track Name:
-            {this.state.track
-              ? this.state.track.message.body.track.track_name
-              : null}
+            {this.state.track.message.body.track.track_name}
           </p>
           <p>
             Track By:
-            {this.state.track
-              ? this.state.track.message.body.track.artist_name
-              : null}
+            {this.state.track.message.body.track.artist_name}
           </p>
 
           <p>Lyrics:</p>
