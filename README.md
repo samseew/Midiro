@@ -36,10 +36,10 @@ To clone and run this application, you'll need [Git](https://git-scm.com)
 
 ```bash
 # Clone this repository
-$ git clone https://github.com/samashtar/virtualpiano
+$ git clone https://github.com/samashtar/midiro
 
 #now cd into the folder
-$ cd virtualpiano
+$ cd midiro
 
 # install dependencies and run it
 $ npm i && npm start
