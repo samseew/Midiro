@@ -27,7 +27,7 @@ export default class PianoContainer extends React.Component {
     super();
     this.brunoSong = new Audio(song);
     this.state = {
-      octave: 2, // no less than 0, no more than 5
+      octave: 2, // current octave, no less than 0, no more than 5
       noteRange: {
         first: 48,
         last: 65
@@ -48,6 +48,7 @@ export default class PianoContainer extends React.Component {
   }
 
   keyboardShortcuts() {
+    //create the keyboard shortcuts
     let lowerCaseShortCuts = KeyboardShortcuts.create({
       firstNote: this.state.noteRange.first,
       lastNote: this.state.noteRange.last,
@@ -60,10 +61,12 @@ export default class PianoContainer extends React.Component {
   }
 
   componentDidMount() {
+    // listener for octave changes
     document.addEventListener("keyup", this.documentListener, false);
   }
 
   documentListener = e => {
+    // change the octave
     if (e.key === "v" || e.key === "V") {
       this.downOctave();
     } else if (e.key === "n" || e.key === "N") {
@@ -73,6 +76,7 @@ export default class PianoContainer extends React.Component {
   };
 
   componentWillUnmount() {
+    // unmounts listener
     document.removeEventListener("keyup", this.documentListener, false);
   }
   downOctave = () => {
@@ -100,6 +104,7 @@ export default class PianoContainer extends React.Component {
     }
   };
   changeSound = event => {
+    // when we load a new sound, reset the keyboard
     let sound = menuOptions.find(el => event.target.textContent === el.text);
     this.setState({
       octave: 2, // no less than 0, no more than 5
@@ -112,8 +117,7 @@ export default class PianoContainer extends React.Component {
   };
   startRecording = () => {
     console.log("starting to record");
-    // let copy = [...this.state.recording];
-    // copy.mode = "RECORDING";
+
     if (this.state.recordColor === null) {
       this.setState({
         recordColor: "red",
@@ -159,6 +163,7 @@ export default class PianoContainer extends React.Component {
   };
 
   secret() {
+    // easter egg
     return (
       <div>
         <br />

@@ -4,7 +4,7 @@ import { Grid } from "semantic-ui-react";
 import Search from "./Search.js";
 import SearchResults from "./SearchResults.js";
 
-const apiKey = "c23746a7d74044e5a0c5191e173cc346";
+const apiKey = "c23746a7d74044e5a0c5191e173cc346"; //Musix Match
 
 export default class LyricsContainer extends React.Component {
   constructor() {

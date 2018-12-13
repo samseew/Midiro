@@ -5,6 +5,7 @@ import Soundfont from "soundfont-player";
 let thisRecording = [];
 
 class SoundfontProvider extends React.Component {
+  // this fetches and loads the sound
   static propTypes = {
     instrumentName: PropTypes.string.isRequired,
     hostname: PropTypes.string.isRequired,
@@ -39,7 +40,6 @@ class SoundfontProvider extends React.Component {
   }
 
   loadInstrument = instrumentName => {
-    // Re-trigger loading state
     this.setState({
       instrument: null
     });
